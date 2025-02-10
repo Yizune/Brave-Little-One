@@ -1,8 +1,0 @@
-res://scenes/main_menu.tscn
-res://scripts/scene_loader.gd
-res://scenes/TileSet.tres
-res://scripts/player.gd
-res://scenes/SpriteFrame.tres
-res://scenes/world.tscn
-res://scenes/arrow.tscn
-res://scenes/player.tscn
