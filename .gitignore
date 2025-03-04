@@ -62,3 +62,11 @@ packages/**
 !packages/offline
 !packages/offline/**
 .logs/
+
+# Ignore exported builds
+*.exe
+*.console.exe
+*.pck
+*.zip
+*.tar.gz
+export_presets.cfg
