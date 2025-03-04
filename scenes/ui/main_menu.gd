@@ -3,7 +3,7 @@ extends CanvasLayer
 var options_scene = preload("res://scenes/ui/options_menu.tscn")
 
 func _ready():
-	# Connect buttons safely
+	# Connect buttons safely and debug their existence
 	connect_button("%PlayButtonArena", on_play_arena)
 	connect_button("%PlayButtonDungeon", on_play_dungeon)
 	connect_button("%PlayButton", on_play_pressed)
@@ -12,10 +12,19 @@ func _ready():
 	connect_button("%QuitButton", on_quit_pressed)
 	connect_button("%BackButton", on_back_button_pressed)
 
+	# Extra Debugging for Dungeon Button
+	var dungeon_button = get_node_or_null("%PlayButtonDungeon")
+	if dungeon_button:
+		dungeon_button.pressed.connect(func(): print("Dungeon button was clicked manually!"))
+		print("Dungeon Button found and connected!")
+	else:
+		print("ERROR: Dungeon Button does not exist in the scene!")
+
 func connect_button(node_path: String, callback: Callable):
 	var button = get_node_or_null(node_path)
 	if button:
 		button.pressed.connect(callback)
+		print("Connected button:", node_path)
 	else:
 		print("Warning: Button not found -", node_path)
 
@@ -41,9 +50,11 @@ func on_level_selected(level_path: String):
 	transition_to_scene(level_path)
 
 func on_play_arena():
+	print("Arena button clicked!")
 	on_level_selected("res://scenes/main/main.tscn")  # Load Arena Level
 
 func on_play_dungeon():
+	print("Dungeon button clicked!")
 	on_level_selected("res://scenes/main/main2.tscn")  # Load Dungeon Level
 
 func transition_to_scene(scene_path: String):
@@ -57,6 +68,7 @@ func transition_to_scene_with_instance(scene: PackedScene, callback: Callable):
 	var instance = scene.instantiate()
 	add_child(instance)
 	instance.back_pressed.connect(callback.bind(instance))
+
 
 
 

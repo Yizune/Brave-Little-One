@@ -21,7 +21,6 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_pil8n")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,7 +29,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer3" type="PanelContainer" parent="."]
+[node name="ParentContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(100, 0)
 offset_left = 214.0
 offset_top = 26.0
@@ -40,78 +39,80 @@ scale = Vector2(1.23445, 1.13885)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="ArenaContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 245.0
+offset_left = 244.0
 offset_top = 42.0
-offset_right = 415.0
-offset_bottom = 162.0
-scale = Vector2(0.9, 0.9)
+offset_right = 400.0
+offset_bottom = 128.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ArenaContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArenaContainer/MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="ArenaContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"BlueOutlineLabel"
 theme_override_font_sizes/font_size = 32
-text = " The Arena‎ ‎ 
+text = "The Arena
 "
+horizontal_alignment = 1
 
-[node name="PlayButtonArena" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
+[node name="PlayButtonArena" parent="ArenaContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Play"
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="DungeonContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(100, 0)
-offset_left = 245.0
-offset_top = 156.0
-offset_right = 415.0
-offset_bottom = 276.0
-scale = Vector2(0.9, 0.9)
+offset_left = 244.0
+offset_top = 140.0
+offset_right = 400.0
+offset_bottom = 256.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="DungeonContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DungeonContainer/MarginContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="DungeonContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"BlueOutlineLabel"
 theme_override_font_sizes/font_size = 32
-text = "The Dungeon"
+text = "The
+Dungeon"
+horizontal_alignment = 1
 
-[node name="PlayButtonDungeon" parent="PanelContainer2/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
+[node name="PlayButtonDungeon" parent="DungeonContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Play"
 
 [node name="BackButton" parent="." instance=ExtResource("3_japjq")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
-offset_left = 246.0
+offset_left = 244.0
 offset_top = 298.0
 offset_right = 400.0
 offset_bottom = 319.0
@@ -120,9 +121,9 @@ text = "Back"
 
 [node name="UpgradesButton" parent="." instance=ExtResource("3_japjq")]
 unique_name_in_owner = true
-offset_left = 245.0
+offset_left = 244.0
 offset_top = 270.0
-offset_right = 399.0
+offset_right = 400.0
 offset_bottom = 291.0
 text = "Upgrades"
 

@@ -6,7 +6,12 @@ var pause_menu_scene = preload("res://scenes/ui/pause_menu.tscn")
 
 
 func _ready():
-	$%Player.health_component.died.connect(on_player_died)
+	var player = get_node_or_null("%Player")
+	if player and player.health_component:
+		player.health_component.died.connect(on_player_died)
+	else:
+		print("Error: Player or health_component is null! Is the Player in the scene?")
+
 
 
 func _unhandled_input(event):

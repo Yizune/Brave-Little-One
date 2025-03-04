@@ -19,17 +19,21 @@ end_screen_scene = ExtResource("2_reqiq")
 
 [node name="Vignette" parent="." instance=ExtResource("1_kitfr")]
 
-[node name="ArenaTimeUI" parent="." instance=ExtResource("2_rggka")]
+[node name="ArenaTimeUI" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("2_rggka")]
+arena_time_manager = NodePath("../ArenaTimeManager")
 
-[node name="ExperienceBar" parent="." instance=ExtResource("3_7nier")]
+[node name="ExperienceBar" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("3_7nier")]
+experience_manager = NodePath("../ExperienceManager")
 
 [node name="ArenaTimeManager" parent="." instance=ExtResource("4_epiae")]
 
-[node name="EnemyManager" parent="." instance=ExtResource("5_fuav4")]
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("5_fuav4")]
+arena_time_manager = NodePath("../ArenaTimeManager")
 
 [node name="ExperienceManager" parent="." instance=ExtResource("6_goqvf")]
 
-[node name="UpgradeManager" parent="." instance=ExtResource("7_pudav")]
+[node name="UpgradeManager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("7_pudav")]
+experience_manager = NodePath("../ExperienceManager")
 
 [node name="GameCamera" parent="." instance=ExtResource("8_44124")]
 
@@ -46,7 +50,8 @@ layer_0/tile_data = PackedInt32Array(1966090, 655361, 8, 1703944, 655361, 8, 203
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
-[node name="Player" parent="Entities" instance=ExtResource("10_wom04")]
+[node name="Player" parent="Entities" node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("10_wom04")]
 position = Vector2(408, 337)
+arena_time_manager = NodePath("../../ArenaTimeManager")
 
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
