@@ -13,10 +13,10 @@ func _ready():
 
 	var dungeon_button = get_node_or_null("%PlayButtonDungeon")
 	if dungeon_button:
-		dungeon_button.pressed.connect(func(): print("Dungeon button was clicked manually!"))
-		print("Dungeon Button found and connected!")
+		dungeon_button.pressed.connect(func(): print("Dungeon button was clicked manually"))
+		print("Dungeon Button found and connected")
 	else:
-		print("ERROR: Dungeon Button does not exist in the scene!")
+		print("ERROR: Dungeon Button does not exist in the scene")
 
 func connect_button(node_path: String, callback: Callable):
 	var button = get_node_or_null(node_path)
@@ -24,7 +24,7 @@ func connect_button(node_path: String, callback: Callable):
 		button.pressed.connect(callback)
 		print("Connected button:", node_path)
 	else:
-		print("Warning: Button not found -", node_path)
+		print("Warning: Button not found ", node_path)
 
 func on_play_pressed():
 	transition_to_scene("res://scenes/main/level_selector.tscn")
@@ -45,14 +45,19 @@ func on_back_button_pressed():
 	transition_to_scene("res://scenes/ui/main_menu.tscn")
 
 func on_level_selected(level_path: String):
-	transition_to_scene(level_path)
+	ScreenTransition.transition()
+	await ScreenTransition.transitioned_halfway
+	get_tree().change_scene_to_file(level_path)
+	#transition_to_scene(level_path)
 
 func on_play_arena():
-	print("Arena button clicked!")
+	print("Arena button clicked")
+	GlobalState.selected_level = "main"
 	on_level_selected("res://scenes/main/main.tscn")  
 
 func on_play_dungeon():
-	print("Dungeon button clicked!")
+	print("Dungeon button clicked")
+	GlobalState.selected_level = "main2"
 	on_level_selected("res://scenes/main/main2.tscn")
 
 func transition_to_scene(scene_path: String):

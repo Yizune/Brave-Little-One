@@ -39,6 +39,13 @@ scale = Vector2(1.23445, 1.13885)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 214.0
+offset_top = 26.0
+offset_right = 384.0
+offset_bottom = 296.0
+scale = Vector2(1.234, 1.139)
+
 [node name="ArenaContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(100, 0)
 offset_left = 244.0
