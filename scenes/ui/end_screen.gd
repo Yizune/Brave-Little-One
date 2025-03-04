@@ -36,6 +36,10 @@ func on_continue_button_pressed():
 	
 	
 func on_quit_button_pressed():
-	ScreenTransition.transition_to_scene("res://scenes/ui/main_menu.tscn")
-	await ScreenTransition.transitioned_halfway
-	get_tree().paused = false
+	if get_tree() and get_tree().root:
+		print("Transitioning to main menu...") 
+		get_tree().paused = false  
+		await get_tree().create_timer(0.1).timeout  
+		ScreenTransition.transition_to_scene("res://scenes/ui/main_menu.tscn")
+	else:
+		print("get_tree() error")

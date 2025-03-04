@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbbc80yrwkvc0"]
+[gd_scene load_steps=12 format=3 uid="uid://bbbc80yrwkvc0"]
 
 [ext_resource type="PackedScene" uid="uid://dmyeg6ldx2orv" path="res://scenes/ui/vignette.tscn" id="1_kitfr"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_lss8g"]
-[ext_resource type="PackedScene" uid="uid://7axbopas4824" path="res://scenes/ui/end_screen.tscn" id="2_reqiq"]
 [ext_resource type="PackedScene" uid="uid://gddxr6myrw3c" path="res://scenes/ui/arena_time_ui.tscn" id="2_rggka"]
 [ext_resource type="PackedScene" uid="uid://3r20bmbofapu" path="res://scenes/ui/experience_bar.tscn" id="3_7nier"]
 [ext_resource type="PackedScene" uid="uid://musqopj5jgj3" path="res://scenes/manager/arena_time_manager.tscn" id="4_epiae"]
@@ -15,7 +14,6 @@
 
 [node name="Main2" type="Node"]
 script = ExtResource("1_lss8g")
-end_screen_scene = ExtResource("2_reqiq")
 
 [node name="Vignette" parent="." instance=ExtResource("1_kitfr")]
 
@@ -51,6 +49,7 @@ layer_0/tile_data = PackedInt32Array(1966090, 655361, 8, 1703944, 655361, 8, 203
 y_sort_enabled = true
 
 [node name="Player" parent="Entities" node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("10_wom04")]
+unique_name_in_owner = true
 position = Vector2(408, 337)
 arena_time_manager = NodePath("../../ArenaTimeManager")
 

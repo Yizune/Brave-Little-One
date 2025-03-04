@@ -15,7 +15,12 @@ func transition():
 func transition_to_scene(scene_path: String):
 	transition()
 	await transitioned_halfway
-	get_tree().change_scene_to_file(scene_path)
+
+	# Ensure scene tree exists before transitioning
+	if get_tree() and get_tree().root:
+		get_tree().change_scene_to_file(scene_path)
+	else:
+		print("get_tree() error")
 
 
 func emit_transitioned_halfway():
