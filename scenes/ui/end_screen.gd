@@ -37,7 +37,7 @@ func on_continue_button_pressed():
 	
 func on_quit_button_pressed():
 	if get_tree() and get_tree().root:
-		print("Transitioning to main menu...") 
+		print("Transitioning to main menu") 
 		get_tree().paused = false  
 		await get_tree().create_timer(0.1).timeout  
 		ScreenTransition.transition_to_scene("res://scenes/ui/main_menu.tscn")

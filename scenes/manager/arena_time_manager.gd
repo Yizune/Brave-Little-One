@@ -19,9 +19,11 @@ func _ready():
 
 func set_timer_for_level():
 	if GlobalState.selected_level == "main":  
-		timer.wait_time = 120
+		timer.wait_time = 240
 	elif GlobalState.selected_level == "main2":  
-		timer.wait_time = 240  
+		timer.wait_time = 300  
+	elif GlobalState.selected_level == "main3":  
+		timer.wait_time = 120  
 	else:
 		print("ArenaTimeManager: Warning - Unrecognized level, using default timer.")
 

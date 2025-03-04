@@ -95,3 +95,7 @@ text = "Play"
 [node name="PlayButtonDungeon" parent="." instance=ExtResource("2_04n0j")]
 visible = false
 text = "Play"
+
+[node name="PlayButtonPlains" parent="." instance=ExtResource("2_04n0j")]
+visible = false
+text = "Play"

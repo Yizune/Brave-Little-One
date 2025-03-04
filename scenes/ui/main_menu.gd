@@ -3,6 +3,7 @@ extends CanvasLayer
 var options_scene = preload("res://scenes/ui/options_menu.tscn")
 
 func _ready():
+	connect_button("%PlayButtonPlains", on_play_plains)
 	connect_button("%PlayButtonArena", on_play_arena)
 	connect_button("%PlayButtonDungeon", on_play_dungeon)
 	connect_button("%PlayButton", on_play_pressed)
@@ -49,6 +50,11 @@ func on_level_selected(level_path: String):
 	await ScreenTransition.transitioned_halfway
 	get_tree().change_scene_to_file(level_path)
 	#transition_to_scene(level_path)
+
+func on_play_plains():
+	print("Plains button clicked")
+	GlobalState.selected_level = "main3"
+	on_level_selected("res://scenes/main/main3.tscn")  
 
 func on_play_arena():
 	print("Arena button clicked")
