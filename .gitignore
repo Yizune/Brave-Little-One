@@ -1,3 +1,6 @@
+# Editor settings (do not share personal paths)
+.vscode/settings.json
+
 # Godot 4+ specific ignores
 .godot/
 # Windows image file caches
