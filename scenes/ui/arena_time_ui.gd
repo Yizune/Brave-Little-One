@@ -11,6 +11,6 @@ func _process(delta):
 
 
 func format_seconds_to_string(seconds: float):
-	var minutes = floor(seconds / 60)
-	var remaining_seconds = seconds - (minutes * 60)
-	return str(minutes) + ":" + ("%02d" % floor(remaining_seconds))
+	var minutes = int(seconds / 60)
+	var remaining_seconds = int(seconds) % 60
+	return "%d:%02d" % [minutes, remaining_seconds]

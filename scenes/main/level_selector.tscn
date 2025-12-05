@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dnrx1ujhc2ue6"]
 
-[ext_resource type="Script" path="res://scenes/main/level_selector.gd" id="1_selector"]
+[ext_resource type="Script" uid="uid://can3nif015wu8" path="res://scenes/main/level_selector.gd" id="1_selector"]
 [ext_resource type="Texture2D" uid="uid://cyf0rquwfsdsg" path="res://assets/ui/brave2.png" id="2_pil8n"]
-[ext_resource type="Script" path="res://resources/levels/level_data.gd" id="2_s65lb"]
+[ext_resource type="Script" uid="uid://bfv6v62dpdsyh" path="res://resources/levels/level_data.gd" id="2_s65lb"]
 [ext_resource type="PackedScene" uid="uid://dmu80fq6rvrp" path="res://scenes/ui/sound_button.tscn" id="3_japjq"]
 [ext_resource type="PackedScene" uid="uid://dmyeg6ldx2orv" path="res://scenes/ui/vignette.tscn" id="4_ys28f"]
 [ext_resource type="PackedScene" uid="uid://b3pyr6vp2yiuq" path="res://scenes/ui/level_card.tscn" id="5_level"]
