@@ -1,22 +1,24 @@
 extends CharacterBody2D
 
-@onready var health_component = $HealthComponent
+signal died
+
+@onready var health_component: HealthComponent = $HealthComponent
 @onready var velocity_component = $VelocityComponent
 @onready var visuals = $Visuals
-@onready var health_bar = $BossHealthBar
-@onready var hurtbox_component = $HurtboxComponent
+@onready var health_bar: ProgressBar = $BossHealthBar
+@onready var health_label: Label = $BossHealthBar/HealthLabel
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 
-var is_moving = false
-var max_health = 1000
-var current_health = max_health
+var is_moving: bool = false
 
-signal died 
 
 func _ready():
-	hurtbox_component.hit.connect(on_hit)
+	health_component.health_changed.connect(update_health_bar)
+	health_component.died.connect(on_died)
 	update_health_bar()
 
-func _process(delta):
+
+func _process(_delta: float):
 	if is_moving:
 		velocity_component.accelerate_to_player()
 	else:
@@ -28,18 +30,16 @@ func _process(delta):
 	if move_sign != 0:
 		visuals.scale = Vector2(move_sign, 1)
 
+
 func set_is_moving(moving: bool):
 	is_moving = moving
 
-func on_hit(damage):
-	current_health -= damage
-	update_health_bar()
-	print("Boss took damage: ", damage, " | Current Health: ", current_health)
-
-	if current_health <= 0:
-		print("Boss is dead!")
-		emit_signal("died")
-		queue_free()
 
 func update_health_bar():
-	health_bar.value = float(current_health) / max_health * 100
+	var percent = health_component.get_health_percent()
+	health_bar.value = percent
+	health_label.text = "%d%%" % int(percent * 100)
+
+
+func on_died():
+	died.emit()

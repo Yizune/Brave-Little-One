@@ -2,57 +2,58 @@ extends CanvasLayer
 
 signal back_pressed
 
+const WINDOWED_TEXT = "Windowed"
+const FULLSCREEN_TEXT = "Fullscreen"
+
 @onready var window_button: Button = $%WindowButton
-@onready var sfx_slider = %SfxSlider
-@onready var music_slider = %MusicSlider
-@onready var back_button = $%BackButton
+@onready var sfx_slider: HSlider = %SfxSlider
+@onready var music_slider: HSlider = %MusicSlider
+@onready var back_button: Button = $%BackButton
 
 
 func _ready():
+	var background = get_node_or_null("Background")
+	if background:
+		background.size = get_viewport().get_visible_rect().size
+		get_tree().root.size_changed.connect(_on_viewport_resized)
+	
 	back_button.pressed.connect(on_back_pressed)
 	window_button.pressed.connect(on_window_button_pressed)
-	sfx_slider.value_changed.connect(on_audio_slider_changed.bind("sfx"))
-	music_slider.value_changed.connect(on_audio_slider_changed.bind("music"))
+	sfx_slider.value_changed.connect(on_sfx_slider_changed)
+	music_slider.value_changed.connect(on_music_slider_changed)
 	update_display()
 
 
 func update_display():
-	window_button.text = "Windowed"
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		window_button.text = "Fullscreen"
-	sfx_slider.value = get_bus_volume_percent("sfx")
-	music_slider.value = get_bus_volume_percent("music")
-	
-
-func get_bus_volume_percent(bus_name: String):
-	var bus_index = AudioServer.get_bus_index(bus_name)
-	var volume_db = AudioServer.get_bus_volume_db(bus_index)
-	return db_to_linear(volume_db)
-	
-
-func set_bus_volume_percent(bus_name: String, percent: float):
-	var bus_index = AudioServer.get_bus_index(bus_name)
-	var volume_db = linear_to_db(percent)
-	AudioServer.set_bus_volume_db(bus_index, volume_db)
+		window_button.text = FULLSCREEN_TEXT
+	else:
+		window_button.text = WINDOWED_TEXT
+	sfx_slider.value = MetaProgression.save_data[Constants.SAVE_KEY_SFX_VOLUME]
+	music_slider.value = MetaProgression.save_data[Constants.SAVE_KEY_MUSIC_VOLUME]
 
 
 func on_window_button_pressed():
-	var mode = DisplayServer.window_get_mode()
-	print(mode)
-	if mode != DisplayServer.WINDOW_MODE_FULLSCREEN:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	
+	var is_fullscreen = DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN
+	MetaProgression.set_fullscreen(is_fullscreen)
 	update_display()
 
 
-func on_audio_slider_changed(value: float, bus_name: String):
-	set_bus_volume_percent(bus_name, value)
+func on_sfx_slider_changed(value: float):
+	MetaProgression.set_sfx_volume(value)
+
+
+func on_music_slider_changed(value: float):
+	MetaProgression.set_music_volume(value)
 
 
 func on_back_pressed():
 	ScreenTransition.transition()
 	await ScreenTransition.transitioned_halfway
 	back_pressed.emit()
+
+
+func _on_viewport_resized():
+	var background = get_node_or_null("Background")
+	if background:
+		background.size = get_viewport().get_visible_rect().size

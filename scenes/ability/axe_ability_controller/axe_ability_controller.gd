@@ -12,20 +12,21 @@ func _ready():
 
 
 func on_timer_timeout():
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var player = get_tree().get_first_node_in_group(Constants.GROUP_PLAYER) as Node2D
 	if player == null:
 		return
 	
-	var foreground = get_tree().get_first_node_in_group("foreground_layer") as Node2D
+	var foreground = get_tree().get_first_node_in_group(Constants.GROUP_FOREGROUND_LAYER) as Node2D
 	if foreground == null:
 		return
 	
 	var axe_instance = axe_ability_scene.instantiate() as Node2D
 	foreground.add_child(axe_instance)
 	axe_instance.global_position = player.global_position
-	axe_instance.hitbox_component.damage = base_damage * additional_damage_percent
+	var meta_damage_mult = MetaProgression.get_damage_multiplier()
+	axe_instance.hitbox_component.damage = base_damage * additional_damage_percent * meta_damage_mult
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if upgrade.id == "axe_damage":
-		additional_damage_percent = 1 + (current_upgrades["axe_damage"]["quantity"] * .1)
+	if upgrade.id == Constants.UPGRADE_AXE_DAMAGE:
+		additional_damage_percent = 1 + (current_upgrades[Constants.UPGRADE_AXE_DAMAGE][Constants.SAVE_KEY_QUANTITY] * .1)

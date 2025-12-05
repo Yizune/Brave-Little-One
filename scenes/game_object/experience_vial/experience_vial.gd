@@ -9,7 +9,7 @@ func _ready():
 
 
 func tween_collect(percent: float, start_position: Vector2):
-	var player = get_tree().get_first_node_in_group("player")
+	var player = get_tree().get_first_node_in_group(Constants.GROUP_PLAYER)
 	if player == null:
 		return
 

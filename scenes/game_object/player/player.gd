@@ -45,17 +45,16 @@ func _process(delta):
 
 
 func get_movement_vector():
-	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var y_movement = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	var x_movement = Input.get_action_strength(Constants.ACTION_MOVE_RIGHT) - Input.get_action_strength(Constants.ACTION_MOVE_LEFT)
+	var y_movement = Input.get_action_strength(Constants.ACTION_MOVE_DOWN) - Input.get_action_strength(Constants.ACTION_MOVE_UP)
 	return Vector2(x_movement, y_movement)
 
 
 func check_deal_damage():
 	if number_colliding_bodies == 0 || !damage_interval_timer.is_stopped():
 		return
-	health_component.damage(1)
+	health_component.damage(1, true)
 	damage_interval_timer.start()
-	print(health_component.current_health)
 
 
 func update_health_display():
@@ -88,12 +87,12 @@ func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades:
 	if ability_upgrade is Ability:
 		var ability = ability_upgrade as Ability
 		abilities.add_child(ability.ability_controller_scene.instantiate())
-	elif ability_upgrade.id == "player_speed":
-		velocity_component.max_speed = base_speed + (base_speed * current_upgrades["player_speed"]["quantity"] * .1)
+	elif ability_upgrade.id == Constants.UPGRADE_PLAYER_SPEED:
+		velocity_component.max_speed = base_speed + (base_speed * current_upgrades[Constants.UPGRADE_PLAYER_SPEED][Constants.SAVE_KEY_QUANTITY] * .1)
 
 
 func on_arena_difficulty_increased(difficulty: int):
-	var health_regeneration_quantity = MetaProgression.get_upgrade_count("health_regeneration")
+	var health_regeneration_quantity = MetaProgression.get_active_upgrade_count(Constants.META_HEALTH_REGEN)
 	if health_regeneration_quantity > 0:
 		var is_thirty_second_interval = (difficulty % 6) == 0
 		if is_thirty_second_interval:

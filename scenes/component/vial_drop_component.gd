@@ -11,7 +11,7 @@ func _ready():
 
 func on_died():
 	var adjusted_drop_percent = drop_percent
-	var experience_gain_upgrade_count = MetaProgression.get_upgrade_count("experience_gain")
+	var experience_gain_upgrade_count = MetaProgression.get_active_upgrade_count(Constants.META_EXPERIENCE_GAIN)
 	if experience_gain_upgrade_count > 0:
 		adjusted_drop_percent += .1
 	
@@ -26,6 +26,6 @@ func on_died():
 	
 	var spawn_position = (owner as Node2D).global_position
 	var vial_instance = vial_scene.instantiate() as Node2D
-	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+	var entities_layer = get_tree().get_first_node_in_group(Constants.GROUP_ENTITIES_LAYER)
 	entities_layer.add_child(vial_instance)
 	vial_instance.global_position = spawn_position

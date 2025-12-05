@@ -9,6 +9,7 @@ signal upgrade_selected(upgrade: AbilityUpgrade)
 
 func _ready():
 	get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func set_ability_upgrades(upgrades: Array[AbilityUpgrade]):
@@ -26,5 +27,6 @@ func on_upgrade_selected(upgrade: AbilityUpgrade):
 	upgrade_selected.emit(upgrade)
 	$AnimationPlayer.play("out")
 	await $AnimationPlayer.animation_finished
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 	queue_free()

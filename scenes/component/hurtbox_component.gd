@@ -23,7 +23,7 @@ func on_area_entered(other_area: Area2D):
 	health_component.damage(hitbox_component.damage)
 	
 	var floating_text = floating_text_scene.instantiate() as Node2D
-	get_tree().get_first_node_in_group("foreground_layer").add_child(floating_text)
+	get_tree().get_first_node_in_group(Constants.GROUP_FOREGROUND_LAYER).add_child(floating_text)
 	
 	floating_text.global_position = global_position + (Vector2.UP * 16)
 	
@@ -31,6 +31,4 @@ func on_area_entered(other_area: Area2D):
 	if round(hitbox_component.damage) == hitbox_component.damage:
 		format_string = "%0.0f"
 	floating_text.start(format_string % hitbox_component.damage)
-	
-	#hit.emit()
 	hit.emit(hitbox_component.damage)

@@ -5,6 +5,8 @@ const SPAWN_RADIUS = 375
 @export var basic_enemy_scene: PackedScene
 @export var wizard_enemy_scene: PackedScene
 @export var bat_enemy_scene: PackedScene
+@export var spider_enemy_scene: PackedScene
+@export var ghost_enemy_scene: PackedScene
 @export var arena_time_manager: Node
 
 @onready var timer = $Timer
@@ -12,10 +14,18 @@ const SPAWN_RADIUS = 375
 var base_spawn_time = 0
 var enemy_table = WeightedTable.new()
 var number_to_spawn = 1
-
+var max_number_to_spawn
 
 func _ready():
 	enemy_table.add_item(basic_enemy_scene, 10)
+	
+	if GlobalState.selected_level == Constants.LEVEL_ARENA or GlobalState.selected_level == Constants.LEVEL_RUINS:
+		enemy_table.add_item(spider_enemy_scene, 8)
+	
+	if GlobalState.selected_level == Constants.LEVEL_RUINS:
+		enemy_table.add_item(ghost_enemy_scene, 6)
+	
+	max_number_to_spawn = GlobalState.get_max_enemies()
 
 	base_spawn_time = timer.wait_time
 	timer.timeout.connect(on_timer_timeout)
@@ -23,9 +33,8 @@ func _ready():
 
 
 func get_spawn_position():
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var player = get_tree().get_first_node_in_group(Constants.GROUP_PLAYER) as Node2D
 	if player == null:
-		print("what")
 		return Vector2.ZERO
 	
 	var spawn_position = Vector2.ZERO
@@ -48,15 +57,18 @@ func get_spawn_position():
 func on_timer_timeout():
 	timer.start()
 	
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var player = get_tree().get_first_node_in_group(Constants.GROUP_PLAYER) as Node2D
 	if player == null:
 		return
 	
-	for i in number_to_spawn:
+	var current_enemy_count = get_tree().get_nodes_in_group(Constants.GROUP_ENEMY).size()
+	var enemies_to_spawn = min(number_to_spawn, max_number_to_spawn - current_enemy_count)
+	
+	for i in enemies_to_spawn:
 		var enemy_scene = enemy_table.pick_item()
 		var enemy = enemy_scene.instantiate() as Node2D
 		
-		var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+		var entities_layer = get_tree().get_first_node_in_group(Constants.GROUP_ENTITIES_LAYER)
 		entities_layer.add_child(enemy)
 		enemy.global_position = get_spawn_position()
 

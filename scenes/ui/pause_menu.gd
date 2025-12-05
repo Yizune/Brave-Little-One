@@ -7,6 +7,7 @@ var is_closing
 
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 	panel_container.pivot_offset = panel_container.size / 2
 	
@@ -22,7 +23,7 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed(Constants.ACTION_PAUSE):
 		close()
 		get_tree().root.set_input_as_handled()
 
@@ -41,6 +42,7 @@ func close():
 	
 	await tween.finished
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 	queue_free()
 
@@ -59,7 +61,7 @@ func on_options_pressed():
 
 func on_quit_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+	get_tree().change_scene_to_file(Constants.SCENE_MAIN_MENU)
 
 
 func on_options_back_pressed(options_menu: Node):

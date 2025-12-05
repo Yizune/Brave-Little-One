@@ -1,225 +1,69 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnrx1ujhc2ue6"]
+[gd_scene load_steps=10 format=3 uid="uid://dnrx1ujhc2ue6"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_vwdua"]
-[ext_resource type="Texture2D" uid="uid://cyf0rquwfsdsg" path="res://my_resources/brave2.png" id="2_pil8n"]
+[ext_resource type="Script" path="res://scenes/main/level_selector.gd" id="1_selector"]
+[ext_resource type="Texture2D" uid="uid://cyf0rquwfsdsg" path="res://assets/ui/brave2.png" id="2_pil8n"]
+[ext_resource type="Script" path="res://resources/levels/level_data.gd" id="2_s65lb"]
 [ext_resource type="PackedScene" uid="uid://dmu80fq6rvrp" path="res://scenes/ui/sound_button.tscn" id="3_japjq"]
 [ext_resource type="PackedScene" uid="uid://dmyeg6ldx2orv" path="res://scenes/ui/vignette.tscn" id="4_ys28f"]
-[ext_resource type="Texture2D" uid="uid://g1dixcbkarls" path="res://my_resources/00.png" id="5_dfm6p"]
-[ext_resource type="Texture2D" uid="uid://b6le8esmmky15" path="res://my_resources/01.png" id="6_6oaq2"]
+[ext_resource type="PackedScene" uid="uid://b3pyr6vp2yiuq" path="res://scenes/ui/level_card.tscn" id="5_level"]
+[ext_resource type="Resource" uid="uid://b3pysk677mbuq" path="res://resources/levels/plains.tres" id="6_plains"]
+[ext_resource type="Resource" uid="uid://clevelarena01" path="res://resources/levels/arena.tres" id="7_arena"]
+[ext_resource type="Resource" uid="uid://clevelruins01" path="res://resources/levels/ruins.tres" id="8_ruins"]
 
 [node name="Level Selector" type="CanvasLayer"]
-script = ExtResource("1_vwdua")
+script = ExtResource("1_selector")
+levels = Array[ExtResource("2_s65lb")]([ExtResource("6_plains"), ExtResource("7_arena"), ExtResource("8_ruins")])
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(320, 180)
-scale = Vector2(0.35, 0.35)
+[node name="Background" type="TextureRect" parent="."]
 texture = ExtResource("2_pil8n")
+expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 50.0
-offset_bottom = 50.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -145.0
+offset_right = 78.0
+offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 4
 
-[node name="ParentContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(100, 0)
-offset_left = 209.0
-offset_top = 10.0
-offset_right = 387.0
-offset_bottom = 311.0
-scale = Vector2(1.23445, 1.13885)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="PlainsContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(100, 0)
-offset_left = 244.0
-offset_top = 21.0
-offset_right = 400.0
-offset_bottom = 109.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="PlainsContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlainsContainer/MarginContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="PlainsContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"BlueOutlineLabel"
-theme_override_font_sizes/font_size = 32
-text = "The Plains
-"
-horizontal_alignment = 1
-
-[node name="PlayButtonPlains" parent="PlainsContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
+[node name="LevelsVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play"
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
 
-[node name="ArenaContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(100, 0)
-offset_left = 244.0
-offset_top = 113.0
-offset_right = 400.0
-offset_bottom = 201.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="ArenaContainer"]
+[node name="PlaceholderCard1" parent="VBoxContainer/ScrollContainer/LevelsVBox" instance=ExtResource("5_level")]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ArenaContainer/MarginContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="PlaceholderCard2" parent="VBoxContainer/ScrollContainer/LevelsVBox" instance=ExtResource("5_level")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="ArenaContainer/MarginContainer/VBoxContainer"]
+[node name="PlaceholderCard3" parent="VBoxContainer/ScrollContainer/LevelsVBox" instance=ExtResource("5_level")]
 layout_mode = 2
-theme_type_variation = &"BlueOutlineLabel"
-theme_override_font_sizes/font_size = 32
-text = "The Arena
-"
-horizontal_alignment = 1
 
-[node name="PlayButtonArena" parent="ArenaContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
+[node name="UpgradesButton" parent="VBoxContainer" instance=ExtResource("3_japjq")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Play"
+text = "Upgrades"
 
-[node name="DungeonContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(100, 0)
-offset_left = 244.0
-offset_top = 205.0
-offset_right = 400.0
-offset_bottom = 293.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="DungeonContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DungeonContainer/MarginContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="DungeonContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"BlueOutlineLabel"
-theme_override_font_sizes/font_size = 32
-text = "The Ruins"
-horizontal_alignment = 1
-
-[node name="PlayButtonDungeon" parent="DungeonContainer/MarginContainer/VBoxContainer" instance=ExtResource("3_japjq")]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Play"
-
-[node name="BackButton" parent="." instance=ExtResource("3_japjq")]
+[node name="BackButton" parent="VBoxContainer" instance=ExtResource("3_japjq")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
-offset_left = 244.0
-offset_top = 323.0
-offset_right = 400.0
-offset_bottom = 344.0
+layout_mode = 2
 size_flags_horizontal = 0
 text = "Back"
 
-[node name="UpgradesButton" parent="." instance=ExtResource("3_japjq")]
-unique_name_in_owner = true
-offset_left = 244.0
-offset_top = 297.0
-offset_right = 400.0
-offset_bottom = 318.0
-text = "Upgrades"
-
 [node name="Vignette" parent="." instance=ExtResource("4_ys28f")]
 layer = 2
-
-[node name="QuitButton" parent="." instance=ExtResource("3_japjq")]
-unique_name_in_owner = true
-visible = false
-offset_right = 26.0
-offset_bottom = 21.0
-text = "Quit"
-
-[node name="OptionsButton" parent="." instance=ExtResource("3_japjq")]
-unique_name_in_owner = true
-visible = false
-text = "Options"
-
-[node name="Stars" type="Node2D" parent="."]
-
-[node name="00" type="Sprite2D" parent="Stars"]
-position = Vector2(345, 98.25)
-scale = Vector2(0.630435, 0.630435)
-texture = ExtResource("5_dfm6p")
-
-[node name="01" type="Sprite2D" parent="Stars"]
-position = Vector2(321, 98.25)
-scale = Vector2(0.630435, 0.630435)
-texture = ExtResource("5_dfm6p")
-
-[node name="02" type="Sprite2D" parent="Stars"]
-position = Vector2(296, 98.25)
-scale = Vector2(0.636364, 0.636364)
-texture = ExtResource("6_6oaq2")
-
-[node name="Stars2" type="Node2D" parent="."]
-position = Vector2(0, 92)
-
-[node name="00" type="Sprite2D" parent="Stars2"]
-position = Vector2(345, 98.25)
-scale = Vector2(0.630435, 0.630435)
-texture = ExtResource("5_dfm6p")
-
-[node name="01" type="Sprite2D" parent="Stars2"]
-position = Vector2(321, 98.25)
-scale = Vector2(0.630435, 0.630435)
-texture = ExtResource("6_6oaq2")
-
-[node name="02" type="Sprite2D" parent="Stars2"]
-position = Vector2(296, 98.25)
-scale = Vector2(0.636364, 0.636364)
-texture = ExtResource("6_6oaq2")
-
-[node name="Stars3" type="Node2D" parent="."]
-position = Vector2(0, 184)
-
-[node name="00" type="Sprite2D" parent="Stars3"]
-position = Vector2(345, 98.25)
-scale = Vector2(0.630435, 0.630435)
-texture = ExtResource("6_6oaq2")
-
-[node name="01" type="Sprite2D" parent="Stars3"]
-position = Vector2(321, 98.25)
-scale = Vector2(0.630435, 0.630435)
-texture = ExtResource("6_6oaq2")
-
-[node name="02" type="Sprite2D" parent="Stars3"]
-position = Vector2(296, 98.25)
-scale = Vector2(0.636364, 0.636364)
-texture = ExtResource("6_6oaq2")

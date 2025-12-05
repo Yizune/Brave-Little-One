@@ -1,10 +1,6 @@
 extends Node2D
 
 
-func _ready():
-	pass
-
-
 func start(text: String):
 	$Label.text = text
 	

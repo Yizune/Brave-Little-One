@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_pic6i"]
 [ext_resource type="PackedScene" uid="uid://bfr1vtlsrf5io" path="res://scenes/component/death_component.tscn" id="7_0c84v"]
 [ext_resource type="PackedScene" uid="uid://gwn2a37qg20t" path="res://scenes/component/random_stream_player_2d_component.tscn" id="8_tlxao"]
-[ext_resource type="Texture2D" uid="uid://dp6iil5u70ghw" path="res://assets/environment/cyclops_enemy.png" id="9_f7nhb"]
+[ext_resource type="Texture2D" uid="uid://dp6iil5u70ghw" path="res://scenes/game_object/boss_enemy/boss_enemy.png" id="9_f7nhb"]
 [ext_resource type="PackedScene" uid="uid://xekbbeidb2pu" path="res://scenes/component/hurtbox_component.tscn" id="10_mj4re"]
 
 [sub_resource type="Animation" id="Animation_7vmvs"]
@@ -167,7 +167,12 @@ radius = 8.0
 radius = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctw0s"]
-bg_color = Color(1, 0.338387, 0.316846, 1)
+bg_color = Color(0.9, 0.3, 0.3, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.247059, 0.14902, 0.192157, 1)
 
 [node name="BossEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
@@ -223,10 +228,29 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_ysmtc")
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
-offset_left = -17.0
-offset_top = -26.0
-offset_right = 96.0
-offset_bottom = -11.0
-scale = Vector2(0.3, 0.3)
+custom_minimum_size = Vector2(60, 20)
+offset_left = -25.0
+offset_top = -29.0
+offset_right = 35.0
+offset_bottom = -9.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(20, 4)
 theme_override_styles/fill = SubResource("StyleBoxFlat_ctw0s")
-value = 100.0
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="BossHealthBar"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 4.0
+offset_right = 43.0
+offset_bottom = 19.0
+theme_override_colors/font_shadow_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0.247059, 0.14902, 0.192157, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1

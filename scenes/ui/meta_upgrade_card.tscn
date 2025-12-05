@@ -218,3 +218,8 @@ texture = ExtResource("13_0n718")
 unique_name_in_owner = true
 layout_mode = 2
 text = "Purchase"
+
+[node name="LoadoutButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Equip"

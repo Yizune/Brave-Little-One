@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://clevelarena01"]
+
+[ext_resource type="Script" path="res://resources/levels/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = "arena_level"
+name = "The Arena"
+scene_path = "res://scenes/main/arena_level.tscn"
+stars = 2
+max_stars = 3

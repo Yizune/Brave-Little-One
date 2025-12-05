@@ -16,11 +16,11 @@ config/use_custom_user_dir=true
 config/custom_user_dir_name="BraveLittleOne"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0.117755, 0.187936, 0.272035, 1)
-boot_splash/image="res://icons/swords_256_black.png"
+boot_splash/image="res://icons/sword_icon.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://my_resources/icon-small.png"
-config/windows_native_icon="res://my_resources/icon-small.ico"
+config/icon="res://assets/ui/icon-small.png"
+config/windows_native_icon="res://assets/ui/icon-small.ico"
 
 [autoload]
 
@@ -42,6 +42,7 @@ window/size/mode=3
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/size/mode.debug=0
 
 [dotnet]

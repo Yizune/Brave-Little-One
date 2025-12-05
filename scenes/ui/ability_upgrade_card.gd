@@ -32,7 +32,7 @@ func select_card():
 	disabled = true
 	$AnimationPlayer.play("selected")
 	
-	for other_card in get_tree().get_nodes_in_group("upgrade_card"):
+	for other_card in get_tree().get_nodes_in_group(Constants.GROUP_UPGRADE_CARD):
 		if other_card == self:
 			continue
 		other_card.play_discard()
@@ -45,7 +45,7 @@ func on_gui_input(event: InputEvent):
 	if disabled:
 		return
 
-	if event.is_action_pressed("left_click"):
+	if event.is_action_pressed(Constants.ACTION_LEFT_CLICK):
 		select_card()
 
 

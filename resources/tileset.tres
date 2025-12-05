@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://cdtmrdl35xphd"]
 
 [ext_resource type="Texture2D" uid="uid://b6o128fcjfljh" path="res://assets/environment/tilemap_packed.png" id="1_wh6kt"]
-[ext_resource type="Texture2D" uid="uid://daxqc3qdv42jn" path="res://my_resources/Dungeon_Tileset.png" id="2_ct6kt"]
-[ext_resource type="Texture2D" uid="uid://bpp0c8qp8lv5v" path="res://my_resources/Overworld_Tileset.png" id="3_0ojei"]
+[ext_resource type="Texture2D" uid="uid://daxqc3qdv42jn" path="res://assets/environment/Dungeon_Tileset.png" id="2_ct6kt"]
+[ext_resource type="Texture2D" uid="uid://bpp0c8qp8lv5v" path="res://assets/environment/Overworld_Tileset.png" id="3_0ojei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2ex0"]
 texture = ExtResource("1_wh6kt")
@@ -112,6 +112,8 @@ texture = ExtResource("1_wh6kt")
 0:0/0 = 0
 0:1/0 = 0
 0:2/0 = 0
+2:5/next_alternative_id = 2
+2:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lmi6"]
 texture = ExtResource("2_ct6kt")

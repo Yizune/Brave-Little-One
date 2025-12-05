@@ -14,7 +14,7 @@ func _ready():
 
 
 func on_timer_timeout():
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var player = get_tree().get_first_node_in_group(Constants.GROUP_PLAYER) as Node2D
 	if player == null:
 		return
 	
@@ -31,11 +31,12 @@ func on_timer_timeout():
 			spawn_position = result["position"]
 		
 		var anvil_ability = anvil_ability_scene.instantiate()
-		get_tree().get_first_node_in_group("foreground_layer").add_child(anvil_ability)
+		get_tree().get_first_node_in_group(Constants.GROUP_FOREGROUND_LAYER).add_child(anvil_ability)
 		anvil_ability.global_position = spawn_position
-		anvil_ability.hitbox_component.damage = BASE_DAMAGE
+		var meta_damage_mult = MetaProgression.get_damage_multiplier()
+		anvil_ability.hitbox_component.damage = BASE_DAMAGE * meta_damage_mult
 
 
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if upgrade.id == "anvil_count":
-		anvil_count = current_upgrades["anvil_count"]["quantity"]
+	if upgrade.id == Constants.UPGRADE_ANVIL_COUNT:
+		anvil_count = current_upgrades[Constants.UPGRADE_ANVIL_COUNT][Constants.SAVE_KEY_QUANTITY]

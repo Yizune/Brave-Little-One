@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MetaUpgrade" load_steps=2 format=3 uid="uid://cdamageresist01"]
+
+[ext_resource type="Script" path="res://resources/meta_upgrades/meta_upgrade.gd" id="1_meta"]
+
+[resource]
+script = ExtResource("1_meta")
+id = "damage_resistance"
+max_quantity = 4
+experience_cost = 75
+title = "Damage Resistance"
+description = "Reduces all damage taken by 5% per level."

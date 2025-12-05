@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://clevelruins01"]
+
+[ext_resource type="Script" path="res://resources/levels/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = "ruins_level"
+name = "The Ruins"
+scene_path = "res://scenes/main/ruins_level.tscn"
+stars = 3
+max_stars = 3

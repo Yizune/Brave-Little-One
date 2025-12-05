@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bweb7proj3ct1"]
+
+[ext_resource type="Script" path="res://scenes/game_object/spider_enemy/web_projectile.gd" id="1_proj"]
+[ext_resource type="Texture2D" uid="uid://d1mrf7xt6bxws" path="res://scenes/game_object/spider_enemy/web_attack.png" id="2_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_proj"]
+radius = 6.0
+
+[node name="WebProjectile" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_proj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tex")
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_proj")

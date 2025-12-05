@@ -30,13 +30,13 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 	if !has_upgrade:
 		current_upgrades[upgrade.id] = {
 			"resource": upgrade,
-			"quantity": 1
+			Constants.SAVE_KEY_QUANTITY: 1
 		}
 	else:
-		current_upgrades[upgrade.id]["quantity"] += 1
+		current_upgrades[upgrade.id][Constants.SAVE_KEY_QUANTITY] += 1
 	
 	if upgrade.max_quantity > 0:
-		var current_quantity = current_upgrades[upgrade.id]["quantity"]
+		var current_quantity = current_upgrades[upgrade.id][Constants.SAVE_KEY_QUANTITY]
 		if current_quantity == upgrade.max_quantity:
 			upgrade_pool.remove_item(upgrade)
 	

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3pyr6vp2yiuq"]
+
+[ext_resource type="Script" path="res://scenes/ui/level_card.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://dmu80fq6rvrp" path="res://scenes/ui/sound_button.tscn" id="2_button"]
+
+[node name="LevelCard" type="PanelContainer"]
+custom_minimum_size = Vector2(156, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_level")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_font_sizes/font_size = 32
+text = "Level Name"
+horizontal_alignment = 1
+
+[node name="StarsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="PlayButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_button")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play"
