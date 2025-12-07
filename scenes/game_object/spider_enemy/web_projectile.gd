@@ -2,8 +2,8 @@ extends Area2D
 
 const SPEED = 40
 const DAMAGE = 0.3
-const SLOW_DURATION = 1.0
-const SLOW_AMOUNT = 0.8 
+const SLOW_DURATION = 1
+const SLOW_PERCENT = 0.2
 
 var direction: Vector2 = Vector2.ZERO
 var has_hit = false
@@ -30,23 +30,34 @@ func _process(delta):
 			if health_component:
 				health_component.damage(DAMAGE, true)
 			
-			var velocity_component = player.get_node_or_null("VelocityComponent")
-			if velocity_component:
-				var original_speed = velocity_component.max_speed
-				velocity_component.max_speed = int(original_speed * SLOW_AMOUNT)
-				
-				var timer = Timer.new()
-				timer.wait_time = SLOW_DURATION
-				timer.one_shot = true
-				player.add_child(timer)
-				timer.timeout.connect(func():
-					if is_instance_valid(velocity_component):
-						velocity_component.max_speed = original_speed
-					timer.queue_free()
-				)
-				timer.start()
-			
+			apply_slow(player)
 			queue_free()
+
+
+func apply_slow(player: Node2D):
+	var velocity_component = player.get_node_or_null("VelocityComponent")
+	if velocity_component == null:
+		return
+	
+	var existing_timer = player.get_node_or_null("WebSlowTimer")
+	if existing_timer:
+		existing_timer.start(SLOW_DURATION)
+	else:
+		var base_speed = player.base_speed
+		var slow_amount = int(base_speed * SLOW_PERCENT)
+		velocity_component.max_speed -= slow_amount
+		
+		var timer = Timer.new()
+		timer.name = "WebSlowTimer"
+		timer.wait_time = SLOW_DURATION
+		timer.one_shot = true
+		player.add_child(timer)
+		timer.timeout.connect(func():
+			if is_instance_valid(velocity_component):
+				velocity_component.max_speed += slow_amount
+			timer.queue_free()
+		)
+		timer.start()
 
 
 func set_direction(dir: Vector2):

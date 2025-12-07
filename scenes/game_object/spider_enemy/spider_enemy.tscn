@@ -126,8 +126,8 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_collision"]
 radius = 4.0
 
-[node name="SpiderEnemy" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 8
+[node name="SpiderEnemy" type="CharacterBody2D" groups=["enemy", "ranged_enemy"]]
+collision_layer = 16
 collision_mask = 9
 script = ExtResource("1_script")
 

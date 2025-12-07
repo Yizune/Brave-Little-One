@@ -88,6 +88,9 @@ func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades:
 		var ability = ability_upgrade as Ability
 		abilities.add_child(ability.ability_controller_scene.instantiate())
 	elif ability_upgrade.id == Constants.UPGRADE_PLAYER_SPEED:
+		var slow_timer = get_node_or_null("WebSlowTimer")
+		if slow_timer:
+			slow_timer.queue_free()
 		velocity_component.max_speed = base_speed + (base_speed * current_upgrades[Constants.UPGRADE_PLAYER_SPEED][Constants.SAVE_KEY_QUANTITY] * .1)
 
 
